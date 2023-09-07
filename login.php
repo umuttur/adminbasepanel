@@ -19,7 +19,7 @@ if (isset($_POST['login'])) {
             $_SESSION['firstname'] = $users['firstname'] ;
             $_SESSION['lastname'] = $users['lastname'] ;
             $_SESSION['user_id'] = $users['user_id'] ;
-            header('location: ./index.php');
+            header('location: ./');
             
         } else {
             print '<div class="alert alert-danger">Bilgileriniz yanlıştır !</div>';
@@ -83,9 +83,6 @@ if (isset($_POST['login'])) {
           <!-- /.col -->
         </div>
       </form>
-      <div>
-        deneme
-      </div>
 
     </div>
     <!-- /.card-body -->

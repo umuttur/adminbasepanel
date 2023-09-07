@@ -12,8 +12,9 @@ if (file_exists($pages)) {
 else {
     include_once 'pages/index.php' ;
 }
-
 ?>
-<?php include_once 'template/footer.php'; ?>
+
+<?php include_once 'template/footer.php'; 
+?>
 
  
