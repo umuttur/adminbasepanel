@@ -68,7 +68,7 @@
                     </div>                   
                    <div class="form-group">
                     <label>Fiyat</label>
-                    <input type="text" name="price" class="form-control">
+                    <input type="text" class="form-control" name="price" class="form-control">
                     </div>
                   <div class="form-group">
                      <label>Durum</label>

@@ -52,7 +52,7 @@ if (isset($_POST['login'])) {
   <!-- /.login-logo -->
   <div class="card card-outline card-primary">
     <div class="card-header text-center">
-      <a href="index.php" class="h1"><b>Yönetim Paneli</b></a>
+      <a href="#" class="h1"><b>Yönetim Paneli</b></a>
     </div>
     <div class="card-body">
       <p class="login-box-msg">Lütfen Oturum Açınız</p>

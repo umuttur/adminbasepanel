@@ -41,7 +41,7 @@
 
 
 
-                        $sql="INSERT INTO qp_webdesign (tittle,description,image,price,adddate,statu,user_id) VALUES (?,?,?,?,?,?,?) ";
+                        $sql="INSERT INTO qp_ecommerce (tittle,description,image,price,adddate,statu,user_id) VALUES (?,?,?,?,?,?,?) ";
                         $args= [$tittle, $description, $image, $price, $adddate, $statu, $user_id ];
                         $args = $adminclass->getSecurity($args);
                         $query = $adminclass->pdoPrepare($sql,$args);
@@ -68,7 +68,7 @@
                     </div>
                    <div class="form-group">
                     <label>Paket Fiyatı</label>
-                    <input type="text" name="price" class="form-control">
+                    <input type="text" class="form-control" name="price" class="form-control">
                     </div>
                   <div class="form-group">
                      <label>Paket Durum</label>
@@ -106,9 +106,9 @@
                   if ($_POST['deleteData']== 1001) {
                     $deleteData = $_POST['checkbox'];
                     $deleteData = implode("','",$deleteData);
-                    $sql1001 = "SELECT * FROM qp_webdesign WHERE id IN ('$deleteData')";
+                    $sql1001 = "SELECT * FROM qp_ecommerce WHERE id IN ('$deleteData')";
                     $stmt = $adminclass->pdoQuery($sql1001);
-                    $sql = "DELETE FROM qp_webdesign WHERE id IN ('$deleteData')";
+                    $sql = "DELETE FROM qp_ecommerce WHERE id IN ('$deleteData')";
                     $query=$adminclass->pdoPrepare($sql);
                     if ($query) {
 
@@ -135,8 +135,8 @@
                   <tr>
                     <th>Seç</th>
                     <th>id</th>
-                    <th>Başlık</th>
-                    <th>Açıklama</th>
+                    <th>Paket Adı</th>
+                    <th>Paket Özellikleri</th>
                     <th>Resim</th>
                     <th>Fiyat</th>
                     <th>Durum</th>
@@ -145,7 +145,7 @@
                   </thead>
                   <tbody>
                   <?php 
-                  $sql = "SELECT * FROM qp_webdesign";
+                  $sql = "SELECT * FROM qp_ecommerce";
                   $query = $adminclass->pdoQueryObj($sql);
                   if ($query) {
 
@@ -170,8 +170,8 @@
                   <tr>
                     <th>Seç</th>
                     <th>id</th>
-                    <th>Başlık</th>
-                    <th>Açıklama</th>
+                    <th>Paket Adı</th>
+                    <th>Paket Özellikleri</th>
                     <th>Resim</th>
                     <th>Fiyat</th>
                     <th>Durum</th>

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Anamakine: 127.0.0.1
--- Üretim Zamanı: 03 Eyl 2023, 22:25:03
+-- Üretim Zamanı: 07 Eyl 2023, 19:41:18
 -- Sunucu sürümü: 10.4.28-MariaDB
 -- PHP Sürümü: 8.2.4
 
@@ -49,6 +49,23 @@ INSERT INTO `qp_about` (`id`, `tittle`, `description`, `adddate`, `user_id`, `st
 -- --------------------------------------------------------
 
 --
+-- Tablo için tablo yapısı `qp_ecommerce`
+--
+
+CREATE TABLE `qp_ecommerce` (
+  `id` int(11) NOT NULL,
+  `tittle` varchar(255) NOT NULL,
+  `description` text NOT NULL,
+  `image` varchar(255) NOT NULL,
+  `price` decimal(19,2) NOT NULL,
+  `adddate` datetime NOT NULL,
+  `statu` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_turkish_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Tablo için tablo yapısı `qp_mission`
 --
 
@@ -71,6 +88,31 @@ INSERT INTO `qp_mission` (`id`, `tittle`, `description`, `adddate`, `user_id`, `
 -- --------------------------------------------------------
 
 --
+-- Tablo için tablo yapısı `qp_mobileapp`
+--
+
+CREATE TABLE `qp_mobileapp` (
+  `id` int(11) NOT NULL,
+  `tittle` varchar(255) NOT NULL,
+  `description` text NOT NULL,
+  `image` varchar(255) NOT NULL,
+  `price` decimal(19,2) NOT NULL,
+  `newprice` decimal(19,2) NOT NULL,
+  `adddate` datetime NOT NULL,
+  `statu` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_turkish_ci;
+
+--
+-- Tablo döküm verisi `qp_mobileapp`
+--
+
+INSERT INTO `qp_mobileapp` (`id`, `tittle`, `description`, `image`, `price`, `newprice`, `adddate`, `statu`, `user_id`) VALUES
+(4, 'Android Uygulama - IOS', 'Mobil uygulama-IOS', 'images/vizyon.webp', 9000.00, 8500.00, '2023-09-07 19:38:06', 1, 1);
+
+-- --------------------------------------------------------
+
+--
 -- Tablo için tablo yapısı `qp_referanslar`
 --
 
@@ -89,7 +131,32 @@ CREATE TABLE `qp_referanslar` (
 --
 
 INSERT INTO `qp_referanslar` (`id`, `tittle`, `description`, `image`, `adddate`, `user_id`, `statu`) VALUES
-(22, 'İZMO 1002', 'sss', 'images/iz2.jpg', '2023-09-03 21:33:49', 1, 1);
+(22, 'İZMO 1002', 'sss', 'images/izmir.jpg', '2023-09-04 08:16:14', 1, 1),
+(23, 'TEST REFERANSss', 'ssss', 'images/iz2.jpg', '2023-09-04 09:23:43', 1, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Tablo için tablo yapısı `qp_users`
+--
+
+CREATE TABLE `qp_users` (
+  `user_id` int(11) NOT NULL,
+  `firstname` varchar(255) NOT NULL,
+  `lastname` varchar(255) NOT NULL,
+  `mail` varchar(255) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `role` int(11) NOT NULL,
+  `statu` int(11) NOT NULL,
+  `createdate` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_turkish_ci;
+
+--
+-- Tablo döküm verisi `qp_users`
+--
+
+INSERT INTO `qp_users` (`user_id`, `firstname`, `lastname`, `mail`, `password`, `role`, `statu`, `createdate`) VALUES
+(1, 'Umut', 'Tur', 'admin@admin.com', '$2y$10$FgbkMwnP8Vz0QmTbhHgfmuZaO2g./Y4jZS.ZRO/YRYBJksYOjLNGO', 1, 1, '2023-09-04 08:31:28');
 
 -- --------------------------------------------------------
 
@@ -114,6 +181,30 @@ INSERT INTO `qp_vision` (`id`, `tittle`, `description`, `adddate`, `user_id`, `s
 (4, 'AÇIKLAMALI VIZYONAA', 'VİZYONLU ACIKLAMA', '2023-09-02 13:43:22', 1, 1),
 (5, 'ekledim bir vizyon', 'ekledim iki vizyon', '2023-09-02 14:09:13', 1, 2);
 
+-- --------------------------------------------------------
+
+--
+-- Tablo için tablo yapısı `qp_webdesign`
+--
+
+CREATE TABLE `qp_webdesign` (
+  `id` int(11) NOT NULL,
+  `tittle` varchar(255) NOT NULL,
+  `description` text NOT NULL,
+  `image` varchar(255) NOT NULL,
+  `price` decimal(19,2) NOT NULL,
+  `adddate` datetime NOT NULL,
+  `statu` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_turkish_ci;
+
+--
+-- Tablo döküm verisi `qp_webdesign`
+--
+
+INSERT INTO `qp_webdesign` (`id`, `tittle`, `description`, `image`, `price`, `adddate`, `statu`, `user_id`) VALUES
+(1, 'TASARIM TEST V1KIRAÇ', 'TASARIM TEST V1KIRAÇ', 'images/v1.jpg', 2000.00, '2023-09-05 13:44:28', 1, 1);
+
 --
 -- Dökümü yapılmış tablolar için indeksler
 --
@@ -125,9 +216,21 @@ ALTER TABLE `qp_about`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Tablo için indeksler `qp_ecommerce`
+--
+ALTER TABLE `qp_ecommerce`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Tablo için indeksler `qp_mission`
 --
 ALTER TABLE `qp_mission`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Tablo için indeksler `qp_mobileapp`
+--
+ALTER TABLE `qp_mobileapp`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -137,9 +240,21 @@ ALTER TABLE `qp_referanslar`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Tablo için indeksler `qp_users`
+--
+ALTER TABLE `qp_users`
+  ADD PRIMARY KEY (`user_id`);
+
+--
 -- Tablo için indeksler `qp_vision`
 --
 ALTER TABLE `qp_vision`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Tablo için indeksler `qp_webdesign`
+--
+ALTER TABLE `qp_webdesign`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -153,22 +268,46 @@ ALTER TABLE `qp_about`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
+-- Tablo için AUTO_INCREMENT değeri `qp_ecommerce`
+--
+ALTER TABLE `qp_ecommerce`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
 -- Tablo için AUTO_INCREMENT değeri `qp_mission`
 --
 ALTER TABLE `qp_mission`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
+-- Tablo için AUTO_INCREMENT değeri `qp_mobileapp`
+--
+ALTER TABLE `qp_mobileapp`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
 -- Tablo için AUTO_INCREMENT değeri `qp_referanslar`
 --
 ALTER TABLE `qp_referanslar`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+
+--
+-- Tablo için AUTO_INCREMENT değeri `qp_users`
+--
+ALTER TABLE `qp_users`
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- Tablo için AUTO_INCREMENT değeri `qp_vision`
 --
 ALTER TABLE `qp_vision`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- Tablo için AUTO_INCREMENT değeri `qp_webdesign`
+--
+ALTER TABLE `qp_webdesign`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
