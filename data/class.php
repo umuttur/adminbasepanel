@@ -20,6 +20,21 @@ class AdminClass
         }
     }
 
+    public function getCategories($categoryList, $parent = 0) {
+        $data = [];
+        foreach ($categoryList as $category) {
+            if ($category->parent_id == $parent) {
+                //CHİLD BULUYOR ()
+                $childCategory = $this->getCategories($categoryList,$category->id);
+                if ($childCategory) {
+                    $category->child = $childCategory;
+                }
+                 $data[] = $category;
+            }
+        }
+      return $data;
+    }
+
     public function getStatu($data) {
         switch ($data) {
             case '1':

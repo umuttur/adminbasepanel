@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Anamakine: 127.0.0.1
--- Üretim Zamanı: 07 Eyl 2023, 19:41:18
+-- Üretim Zamanı: 08 Eyl 2023, 16:10:54
 -- Sunucu sürümü: 10.4.28-MariaDB
 -- PHP Sürümü: 8.2.4
 
@@ -45,6 +45,37 @@ INSERT INTO `qp_about` (`id`, `tittle`, `description`, `adddate`, `user_id`, `st
 (9, 'CENGIZHAN KIRAÇ', 'CENGO_KIRAC@UMUTTUR.COM', '2023-09-02 11:16:58', 1, 1),
 (11, 'ELÇİ ATEŞ VS CENGO', 'ELÇİ ATEŞ CENGOYLA TEKE TEK ÇIKIYOR', '2023-09-02 11:18:34', 1, 2),
 (12, 'SEMRA', 'SEMRA', '2023-09-02 14:49:42', 1, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Tablo için tablo yapısı `qp_categories`
+--
+
+CREATE TABLE `qp_categories` (
+  `id` int(11) NOT NULL,
+  `tittle` varchar(255) NOT NULL,
+  `parent_id` int(11) NOT NULL,
+  `statu` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `adddate` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_turkish_ci;
+
+--
+-- Tablo döküm verisi `qp_categories`
+--
+
+INSERT INTO `qp_categories` (`id`, `tittle`, `parent_id`, `statu`, `user_id`, `adddate`) VALUES
+(2, 'Çanta', 0, 1, 1, '2023-09-08 10:53:12'),
+(3, 'Mobilya', 0, 1, 1, '2023-09-08 10:54:00'),
+(4, 'Ayakkabı', 0, 1, 1, '2023-09-08 10:57:35'),
+(5, 'Teknoloji', 0, 1, 1, '2023-09-08 10:58:32'),
+(6, 'Kitap', 0, 1, 1, '2023-09-08 10:59:39'),
+(7, 'Erkek Ayakkabı', 4, 1, 1, '2023-09-08 11:15:37'),
+(8, 'Kadın Ayakkabı', 4, 1, 1, '2023-09-08 11:16:53'),
+(11, 'Kadın Ayakkabı(SMALL)', 8, 1, 1, '2023-09-08 13:18:41'),
+(12, 'KULAKLIKLAR', 0, 1, 1, '2023-09-08 15:07:34'),
+(13, 'APPLE KULAKLIK', 12, 1, 1, '2023-09-08 15:07:44');
 
 -- --------------------------------------------------------
 
@@ -216,6 +247,12 @@ ALTER TABLE `qp_about`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Tablo için indeksler `qp_categories`
+--
+ALTER TABLE `qp_categories`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Tablo için indeksler `qp_ecommerce`
 --
 ALTER TABLE `qp_ecommerce`
@@ -268,6 +305,12 @@ ALTER TABLE `qp_about`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
+-- Tablo için AUTO_INCREMENT değeri `qp_categories`
+--
+ALTER TABLE `qp_categories`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+
+--
 -- Tablo için AUTO_INCREMENT değeri `qp_ecommerce`
 --
 ALTER TABLE `qp_ecommerce`
@@ -283,7 +326,7 @@ ALTER TABLE `qp_mission`
 -- Tablo için AUTO_INCREMENT değeri `qp_mobileapp`
 --
 ALTER TABLE `qp_mobileapp`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- Tablo için AUTO_INCREMENT değeri `qp_referanslar`
