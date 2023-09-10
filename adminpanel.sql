@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Anamakine: 127.0.0.1
--- Üretim Zamanı: 08 Eyl 2023, 16:10:54
+-- Üretim Zamanı: 10 Eyl 2023, 12:52:42
 -- Sunucu sürümü: 10.4.28-MariaDB
 -- PHP Sürümü: 8.2.4
 
@@ -80,6 +80,32 @@ INSERT INTO `qp_categories` (`id`, `tittle`, `parent_id`, `statu`, `user_id`, `a
 -- --------------------------------------------------------
 
 --
+-- Tablo için tablo yapısı `qp_color`
+--
+
+CREATE TABLE `qp_color` (
+  `color_code` int(11) NOT NULL,
+  `color_desc` varchar(255) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `create_date` datetime NOT NULL,
+  `statu` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_turkish_ci;
+
+--
+-- Tablo döküm verisi `qp_color`
+--
+
+INSERT INTO `qp_color` (`color_code`, `color_desc`, `user_id`, `create_date`, `statu`) VALUES
+(1, 'Beyaz', 1, '2023-09-10 12:10:10', 1),
+(2, 'Siyah', 1, '2023-09-10 12:23:48', 1),
+(5, 'MAVİ', 1, '2023-09-10 12:42:34', 1),
+(6, '', 1, '2023-09-10 12:43:18', 1),
+(7, 'Gri', 1, '2023-09-10 12:50:15', 1),
+(8, 'Kırmızı', 1, '2023-09-10 12:51:32', 1);
+
+-- --------------------------------------------------------
+
+--
 -- Tablo için tablo yapısı `qp_ecommerce`
 --
 
@@ -144,6 +170,23 @@ INSERT INTO `qp_mobileapp` (`id`, `tittle`, `description`, `image`, `price`, `ne
 -- --------------------------------------------------------
 
 --
+-- Tablo için tablo yapısı `qp_product`
+--
+
+CREATE TABLE `qp_product` (
+  `product_id` int(11) NOT NULL,
+  `product_name` varchar(255) NOT NULL,
+  `product_desc` text NOT NULL,
+  `color_code` int(11) NOT NULL,
+  `size_code` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `create_date` datetime NOT NULL,
+  `statu` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_turkish_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Tablo için tablo yapısı `qp_referanslar`
 --
 
@@ -164,6 +207,20 @@ CREATE TABLE `qp_referanslar` (
 INSERT INTO `qp_referanslar` (`id`, `tittle`, `description`, `image`, `adddate`, `user_id`, `statu`) VALUES
 (22, 'İZMO 1002', 'sss', 'images/izmir.jpg', '2023-09-04 08:16:14', 1, 1),
 (23, 'TEST REFERANSss', 'ssss', 'images/iz2.jpg', '2023-09-04 09:23:43', 1, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Tablo için tablo yapısı `qp_size`
+--
+
+CREATE TABLE `qp_size` (
+  `size_id` int(11) NOT NULL,
+  `size_desc` varchar(255) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `create_date` datetime NOT NULL,
+  `statu` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_turkish_ci;
 
 -- --------------------------------------------------------
 
@@ -253,6 +310,12 @@ ALTER TABLE `qp_categories`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Tablo için indeksler `qp_color`
+--
+ALTER TABLE `qp_color`
+  ADD PRIMARY KEY (`color_code`);
+
+--
 -- Tablo için indeksler `qp_ecommerce`
 --
 ALTER TABLE `qp_ecommerce`
@@ -271,10 +334,22 @@ ALTER TABLE `qp_mobileapp`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Tablo için indeksler `qp_product`
+--
+ALTER TABLE `qp_product`
+  ADD PRIMARY KEY (`product_id`);
+
+--
 -- Tablo için indeksler `qp_referanslar`
 --
 ALTER TABLE `qp_referanslar`
   ADD PRIMARY KEY (`id`);
+
+--
+-- Tablo için indeksler `qp_size`
+--
+ALTER TABLE `qp_size`
+  ADD PRIMARY KEY (`size_id`);
 
 --
 -- Tablo için indeksler `qp_users`
@@ -311,6 +386,12 @@ ALTER TABLE `qp_categories`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
+-- Tablo için AUTO_INCREMENT değeri `qp_color`
+--
+ALTER TABLE `qp_color`
+  MODIFY `color_code` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
 -- Tablo için AUTO_INCREMENT değeri `qp_ecommerce`
 --
 ALTER TABLE `qp_ecommerce`
@@ -329,10 +410,22 @@ ALTER TABLE `qp_mobileapp`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
+-- Tablo için AUTO_INCREMENT değeri `qp_product`
+--
+ALTER TABLE `qp_product`
+  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- Tablo için AUTO_INCREMENT değeri `qp_referanslar`
 --
 ALTER TABLE `qp_referanslar`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+
+--
+-- Tablo için AUTO_INCREMENT değeri `qp_size`
+--
+ALTER TABLE `qp_size`
+  MODIFY `size_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- Tablo için AUTO_INCREMENT değeri `qp_users`
