@@ -19,6 +19,18 @@ class AdminClass
             header('location: ./login.php');
         }
     }
+    public function getColorCount($color_desc) {
+        $sql="SELECT COUNT(*) as total FROM `qp_color` WHERE color_desc = ?";
+        $prepare= $this->pdo->prepare($sql);
+        $prepare->execute([$color_desc]);
+        $response = $prepare->fetch(PDO::FETCH_OBJ);
+        if ($response) {
+            return $response;
+        }
+        else {
+            return false ;
+        }
+    }
 
     public function getCategories($categoryList, $parent = 0) {
         $data = [];

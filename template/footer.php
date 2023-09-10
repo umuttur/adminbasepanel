@@ -60,9 +60,93 @@
 <script src="plugins/datatables-buttons/js/buttons.html5.min.js"></script>
 <script src="plugins/datatables-buttons/js/buttons.print.min.js"></script>
 <script src="plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
+<script src="plugins/sweetalert2/sweetalert2.min.js"></script>
+<!-- Toastr -->
+<script src="plugins/toastr/toastr.min.js"></script>
 <!-- AdminLTE App -->
 <script src="dist/js/adminlte.min.js"></script>
 <!-- Page specific script -->
+<script>
+$(document).on("submit","#product_form", function(event){
+  event.preventDefault();
+  var form_data = new FormData(document.getElementById('product_form'));
+  $.ajax({
+    method: 'POST',
+    url: './helper/process.php',
+    data:form_data,
+    contentType:false,
+    processData: false,
+    success:function(succ_data) {
+      console.log(succ_data);
+    },
+    error:function(err_data) {
+      console.log(err_data);
+    }
+  });
+})
+
+$(document).on("submit","#color_form", function(event){
+  event.preventDefault();
+  var form_data = new FormData(document.getElementById('color_form'));
+  var Toast = Swal.mixin({
+      toast: true,
+      position: 'top-end',
+      showConfirmButton: false,
+      timer: 3000
+    });
+  $.ajax({
+    method: 'POST',
+    url: './helper/process.php',
+    data:form_data,
+    contentType:false,
+    processData: false,
+    success:function(succ_data) {
+      if (succ_data == 'İşlem Başarılı..') {
+        Toast.fire({
+        icon: 'success',
+        title: succ_data
+       })
+      }
+      else if(succ_data=='İşlem Başarısız..') {
+        Toast.fire({
+        icon: 'warning',
+        title: succ_data
+       })
+      }
+      else {
+        Toast.fire({
+        icon: 'info',
+        title: succ_data
+       })
+      }
+    },
+    error:function(err_data) {
+      console.log(err_data);
+    }
+  });
+})
+
+$(document).on("submit","#size_form", function(event){
+  event.preventDefault();
+  var form_data = new FormData(document.getElementById('size_form'));
+  $.ajax({
+    method: 'POST',
+    url: './helper/process.php',
+    data:form_data,
+    contentType:false,
+    processData: false,
+    success:function(succ_data) {
+      console.log(succ_data);
+    },
+    error:function(err_data) {
+      console.log(err_data);
+    }
+  });
+})
+
+
+</script>
+
 <script>
   $(function () {
     $("#example1").DataTable({
