@@ -49,12 +49,16 @@
                   <!-- input states -->
                   <div class="row">
                     <div class="col-sm-12">
-                      <!-- select -->
                       <div class="form-group">
                         <label>Renk Seçiniz</label>
                         <select class="form-control" id="color_code" name="color_code">
-                          <option value="1">Aktif</option>
-                          <option value="2">Pasif</option>
+                          <?php
+                           $sql="SELECT * FROM qp_color WHERE statu = 1";
+                           $query = $adminclass->pdoQueryObj($sql);
+                           if ($query) {
+                          foreach ($query as $color) { ?>
+                          <option value="<?php print $color->color_code?>"><?php print $color->color_desc?></option>
+                          <?php }} ?>
                         </select>
                       </div>
                     </div>
@@ -65,8 +69,13 @@
                       <div class="form-group">
                         <label>Beden Seçiniz</label>
                         <select class="form-control" id="size_code" name="size_code">
-                          <option value="1">Aktif</option>
-                          <option value="2">Pasif</option>
+                        <?php
+                           $sql="SELECT * FROM qp_size WHERE statu = 1";
+                           $query = $adminclass->pdoQueryObj($sql);
+                           if ($query) {
+                          foreach ($query as $size) { ?>
+                          <option value="<?php print $size->size_id?>"><?php print $size->size_desc?></option>
+                          <?php }} ?>
                         </select>
                       </div>
                     </div>
@@ -93,12 +102,13 @@
                       <div class="form-group">
                         <label>Durum</label>
                         <select class="form-control" name="statu" id="statu">
-                          <option>Aktif</option>
-                          <option>Pasif</option>
+                          <option value="1">Aktif</option>
+                          <option value="2">Pasif</option>
                         </select>
                       </div>
                     </div>
                   </div>
+                  <input type="hidden" value="95954" name="postcheck">
                   <button class="btn btn-success" id="save_data" name="save_data">KAYDET</button>
                 </form>
               </div>
@@ -151,7 +161,7 @@
                       <!-- text input -->
                       <div class="form-group">
                         <label>Beden</label>
-                        <input type="text" class="form-control" name ="size_desc" id ="size_desc" placeholder="Renk adı giriniz..">
+                        <input type="text" class="form-control" name ="size_desc" id ="size_desc" placeholder="Beden adı giriniz..">
                       </div>
                     </div>
                   </div>

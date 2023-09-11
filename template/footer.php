@@ -70,6 +70,12 @@
 $(document).on("submit","#product_form", function(event){
   event.preventDefault();
   var form_data = new FormData(document.getElementById('product_form'));
+  var Toast = Swal.mixin({
+      toast: true,
+      position: 'center',
+      showConfirmButton: false,
+      timer: 3000
+    });
   $.ajax({
     method: 'POST',
     url: './helper/process.php',
@@ -77,7 +83,25 @@ $(document).on("submit","#product_form", function(event){
     contentType:false,
     processData: false,
     success:function(succ_data) {
-      console.log(succ_data);
+      if (succ_data == 'Boş alan bırakmayınız...') {
+        Toast.fire({
+        icon: 'error',
+        title: succ_data
+       })
+      }
+      else if(succ_data=='Yeni Ürün Eklendi...') {
+        Toast.fire({
+        icon: 'success',
+        title: succ_data
+       })
+      }
+      else if(succ_data=='Ürün ekleme başarısız...') {
+        Toast.fire({
+        icon: 'error',
+        title: succ_data
+       })
+      }
+      $('#product_form').trigger('reset');
     },
     error:function(err_data) {
       console.log(err_data);
@@ -90,7 +114,7 @@ $(document).on("submit","#color_form", function(event){
   var form_data = new FormData(document.getElementById('color_form'));
   var Toast = Swal.mixin({
       toast: true,
-      position: 'top-end',
+      position: 'center',
       showConfirmButton: false,
       timer: 3000
     });
@@ -119,6 +143,8 @@ $(document).on("submit","#color_form", function(event){
         title: succ_data
        })
       }
+      $('#color_form').trigger('reset');
+      location.reload();
     },
     error:function(err_data) {
       console.log(err_data);
@@ -129,6 +155,12 @@ $(document).on("submit","#color_form", function(event){
 $(document).on("submit","#size_form", function(event){
   event.preventDefault();
   var form_data = new FormData(document.getElementById('size_form'));
+  var Toast = Swal.mixin({
+      toast: true,
+      position: 'center',
+      showConfirmButton: false,
+      timer: 3000
+    });
   $.ajax({
     method: 'POST',
     url: './helper/process.php',
@@ -136,14 +168,31 @@ $(document).on("submit","#size_form", function(event){
     contentType:false,
     processData: false,
     success:function(succ_data) {
-      console.log(succ_data);
+      if (succ_data == 'İşlem Başarılı..') {
+        Toast.fire({
+        icon: 'success',
+        title: succ_data
+       })
+      }
+      else if(succ_data=='İşlem Başarısız..') {
+        Toast.fire({
+        icon: 'warning',
+        title: succ_data
+       })
+      }
+      else {
+        Toast.fire({
+        icon: 'info',
+        title: succ_data
+       })
+      }
+      $('#size_form').trigger('reset');
     },
     error:function(err_data) {
       console.log(err_data);
     }
   });
 })
-
 
 </script>
 

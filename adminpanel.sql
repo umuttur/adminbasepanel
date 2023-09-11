@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Anamakine: 127.0.0.1
--- Üretim Zamanı: 10 Eyl 2023, 12:52:42
+-- Üretim Zamanı: 11 Eyl 2023, 15:57:01
 -- Sunucu sürümü: 10.4.28-MariaDB
 -- PHP Sürümü: 8.2.4
 
@@ -96,12 +96,13 @@ CREATE TABLE `qp_color` (
 --
 
 INSERT INTO `qp_color` (`color_code`, `color_desc`, `user_id`, `create_date`, `statu`) VALUES
-(1, 'Beyaz', 1, '2023-09-10 12:10:10', 1),
-(2, 'Siyah', 1, '2023-09-10 12:23:48', 1),
-(5, 'MAVİ', 1, '2023-09-10 12:42:34', 1),
-(6, '', 1, '2023-09-10 12:43:18', 1),
-(7, 'Gri', 1, '2023-09-10 12:50:15', 1),
-(8, 'Kırmızı', 1, '2023-09-10 12:51:32', 1);
+(1, 'BEYAZ', 1, '2023-09-11 14:01:05', 1),
+(2, 'SİYAH', 1, '2023-09-11 14:01:08', 1),
+(3, 'SARI', 1, '2023-09-11 14:01:10', 1),
+(4, 'KIRMIZI', 1, '2023-09-11 14:01:13', 1),
+(5, 'MAVİ', 1, '2023-09-11 14:01:15', 1),
+(7, 'Haki', 1, '2023-09-11 15:53:20', 1),
+(8, 'MOR', 1, '2023-09-11 15:53:51', 1);
 
 -- --------------------------------------------------------
 
@@ -179,10 +180,21 @@ CREATE TABLE `qp_product` (
   `product_desc` text NOT NULL,
   `color_code` int(11) NOT NULL,
   `size_code` int(11) NOT NULL,
+  `product_miktar` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
   `create_date` datetime NOT NULL,
   `statu` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_turkish_ci;
+
+--
+-- Tablo döküm verisi `qp_product`
+--
+
+INSERT INTO `qp_product` (`product_id`, `product_name`, `product_desc`, `color_code`, `size_code`, `product_miktar`, `user_id`, `create_date`, `statu`) VALUES
+(1, 'test urun adı', 'test acıklama', 1, 1, 111, 1, '2023-09-11 15:27:05', 1),
+(2, 'adsasda', 'dasdasda', 1, 1, 22, 1, '2023-09-11 15:45:07', 2),
+(3, '100', '1001', 1, 1, 222, 1, '2023-09-11 15:46:15', 1),
+(4, 'swsw', 'swsw', 1, 1, 2323, 1, '2023-09-11 15:49:39', 1);
 
 -- --------------------------------------------------------
 
@@ -221,6 +233,17 @@ CREATE TABLE `qp_size` (
   `create_date` datetime NOT NULL,
   `statu` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_turkish_ci;
+
+--
+-- Tablo döküm verisi `qp_size`
+--
+
+INSERT INTO `qp_size` (`size_id`, `size_desc`, `user_id`, `create_date`, `statu`) VALUES
+(1, '40', 1, '2023-09-11 14:01:20', 1),
+(2, '41', 1, '2023-09-11 14:01:21', 1),
+(3, '42', 1, '2023-09-11 14:01:23', 1),
+(4, '43', 1, '2023-09-11 14:01:25', 1),
+(5, '44', 1, '2023-09-11 14:01:32', 1);
 
 -- --------------------------------------------------------
 
@@ -413,7 +436,7 @@ ALTER TABLE `qp_mobileapp`
 -- Tablo için AUTO_INCREMENT değeri `qp_product`
 --
 ALTER TABLE `qp_product`
-  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- Tablo için AUTO_INCREMENT değeri `qp_referanslar`
@@ -425,7 +448,7 @@ ALTER TABLE `qp_referanslar`
 -- Tablo için AUTO_INCREMENT değeri `qp_size`
 --
 ALTER TABLE `qp_size`
-  MODIFY `size_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `size_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- Tablo için AUTO_INCREMENT değeri `qp_users`

@@ -31,6 +31,18 @@ class AdminClass
             return false ;
         }
     }
+    public function getSizeCount($size_desc) {
+        $sql="SELECT COUNT(*) as total FROM `qp_size` WHERE size_desc = ?";
+        $prepare= $this->pdo->prepare($sql);
+        $prepare->execute([$size_desc]);
+        $response = $prepare->fetch(PDO::FETCH_OBJ);
+        if ($response) {
+            return $response;
+        }
+        else {
+            return false ;
+        }
+    }
 
     public function getCategories($categoryList, $parent = 0) {
         $data = [];
