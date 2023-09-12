@@ -183,6 +183,70 @@
               <!-- /.card-body -->
         </div>
         </div>
+        <div class="col-sm-12">
+            <div class="card">
+              <div class="card-header">
+                <h3 class="card-title">DataTable with default features</h3>
+              </div>
+              <!-- /.card-header -->
+              <div class="card-body">
+                <table id="example1" class="table table-bordered table-striped">
+                  <thead>
+                  <tr>
+                    <th>Ürün Id</th>
+                    <th>Ürün Adı</th>
+                    <th>Ürün Rengi</th>
+                    <th>Ürün Bedeni</th>
+                    <th>Ürün Miktarı</th>
+                    <th>Ürün Resmi</th>
+                    <th>Ürün Durumu</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                    <?php 
+                    $sql="SELECT 
+                    t1.product_id,
+                    t1.product_name,
+                    t2.color_desc,
+                    t3.size_desc,
+                    t1.product_miktar,
+                    t1.images,
+                    t1.statu
+                    FROM qp_product t1
+                    INNER JOIN qp_color t2 ON t1.color_code = t2.color_code
+                    INNER JOIN qp_size t3 ON t1.size_code = t3.size_id";
+                    $products = $adminclass->pdoQueryObj($sql);
+                    if ($products) {
+                      foreach ($products as $product) {             
+                    ?>
+                  <tr>
+                    <td><?php print $product->product_id ; ?></td>
+                    <td><?php print $product->product_name ; ?></td>
+                    <td><?php print $product->color_desc ; ?></td>
+                    <td><?php print $product->size_desc; ?></td>
+                    <td><?php print $product->product_miktar ; ?></td>
+                    <td><?php print $product->images ; ?></td>
+                    <td><?php print $adminclass->getStatu($product->statu) ; ?></td>
+                  </tr>
+                  <?php }}?>
+                  </tbody>
+                  <tfoot>
+                  <tr>
+                    <th>Ürün ID</th>
+                    <th>Ürün Adı</th>
+                    <th>Ürün Rengi</th>
+                    <th>Ürün Bedeni</th>
+                    <th>Ürün Miktarı</th>
+                    <th>Ürün Resmi</th>
+                    <th>Ürün Durumu</th>
+                  </tr>
+                  </tfoot>
+                </table>
+              </div>
+              <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+          </div>
       </div>
       </div>
     </section>

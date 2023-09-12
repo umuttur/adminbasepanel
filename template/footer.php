@@ -70,6 +70,7 @@
 $(document).on("submit","#product_form", function(event){
   event.preventDefault();
   var form_data = new FormData(document.getElementById('product_form'));
+  console.log(form_data);
   var Toast = Swal.mixin({
       toast: true,
       position: 'center',
@@ -102,12 +103,17 @@ $(document).on("submit","#product_form", function(event){
        })
       }
       $('#product_form').trigger('reset');
+      location.reload();
     },
     error:function(err_data) {
       console.log(err_data);
     }
   });
 })
+
+/*
+
+*/
 
 $(document).on("submit","#color_form", function(event){
   event.preventDefault();
@@ -187,6 +193,7 @@ $(document).on("submit","#size_form", function(event){
        })
       }
       $('#size_form').trigger('reset');
+      location.reload();
     },
     error:function(err_data) {
       console.log(err_data);

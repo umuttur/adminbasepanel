@@ -2,39 +2,49 @@
 
 
 if (isset($_POST['product_name'])) {
-    if ($_POST['postcheck']==95954) {
-    $product_name = $_POST['product_name'] ;
-    $product_desc = $_POST['product_desc'] ;
-    $color_code = $_POST['color_code'] ;
-    $size_code = $_POST['size_code'] ;
-    $product_miktar = $_POST['product_miktar'] ;
-    $create_date= date("Y-m-d H:i:s");
-    $statu = $_POST['statu'] ;
-    if(empty($product_name) || empty($product_desc) || empty($color_code) || empty($size_code) || empty($product_miktar) || empty($statu)){
-        print 'Boş alan bırakmayınız...';} else {
-            $args = [
-                $product_name,
-                $product_desc,
-                $color_code,
-                $size_code,
-                $product_miktar,
-                $user_id,
-                $create_date,
-                $statu
-            ];
-        $args = $adminclass -> getSecurity($args);
-        $sql = "INSERT INTO qp_product(product_name, product_desc, color_code, size_code, product_miktar, user_id, create_date, statu) VALUES (?,?,?,?,?,?,?,?)";
-        $prepare = $adminclass->pdoPrepare($sql,$args);
-        if ($prepare) {
-            print 'Yeni Ürün Eklendi...';
+    $path = '../images/';
+    $image_name = date('Y-m-d').'-'.rand(100,999).'-'.$_FILES['images']['name'];
+    $image_tmp_name = $_FILES['images']['tmp_name'];
+
+
+
+
+    if ($_POST['postcheck']==95951) {
+        $product_name = $_POST['product_name'] ;
+        $product_desc = $_POST['product_desc'] ;
+        $color_code = $_POST['color_code'] ;
+        $size_code = $_POST['size_code'] ;
+        $product_miktar = $_POST['product_miktar'] ;
+        $create_date= date("Y-m-d H:i:s");
+        $statu = $_POST['statu'] ;
+        if(empty($product_name) || empty($product_desc) || empty($color_code) || empty($size_code) || empty($product_miktar) || empty($statu)){
+            print 'Boş alan bırakmayınız...';
         } else {
-            print 'Ürün ekleme başarısız...';
+                $args = [
+                    $product_name,
+                    $product_desc,
+                    $color_code,
+                    $size_code,
+                    $product_miktar,
+                    $user_id,
+                    $create_date,
+                    $statu,
+                    $image_name
+                ];
+            $args = $adminclass -> getSecurity($args);
+            $sql = "INSERT INTO qp_product(product_name, product_desc, color_code, size_code, product_miktar, user_id, create_date, statu, images) VALUES (?,?,?,?,?,?,?,?,?)";
+            $prepare = $adminclass->pdoPrepare($sql,$args);
+            if ($prepare) {
+                move_uploaded_file($image_tmp_name, $path.$image_name);
+                print 'Yeni Ürün Eklendi...';
+            } else {
+                print 'Ürün ekleme başarısız...';
+            }
+    
         }
+    }
 
-        }
-}}
-
-
+}
 
 
 
@@ -66,7 +76,7 @@ if (isset($_POST['color_desc'])) {
 
 if (isset($_POST['size_desc'])) {
     $size_desc = $adminclass->getSecurity($_POST['size_desc']);
-    if (empty($color_desc)) {
+    if (empty($size_desc)) {
         print 'Beden açıklaması boş bırakılamaz';
      } else {
     $statu = $adminclass->getSecurity($_POST['statu']);
