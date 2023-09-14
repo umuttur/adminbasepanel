@@ -1,5 +1,27 @@
 <?php require_once '../init.php';
 
+if (isset($_POST['product_edit_id'])) {
+    $product_edit_id = $adminclass->getSecurity($_POST['product_edit_id']);
+    $query = $adminclass->getProduct($product_edit_id);
+    if ($query) {
+        print json_encode($query) ;
+    } else {
+        print 'İşlem Başarısız' ;
+    }
+
+}
+
+if (isset($_POST['product_delete_id'])) {
+    $product_delete_id = $adminclass->getSecurity($_POST['product_delete_id']);
+    $sql = "DELETE FROM qp_product WHERE product_id = :product_id";
+    $args = ['product_id' => $product_delete_id];
+    $query = $adminclass->pdoPrepare($sql,$args);
+    if ($query) {
+        print 'Ürün Silindi...' ;
+    }else {
+        print 'İşlem Hatası';
+    }
+}
 
 if (isset($_POST['product_name'])) {
     $path = '../images/';
@@ -9,7 +31,7 @@ if (isset($_POST['product_name'])) {
 
 
 
-    if ($_POST['postcheck']==95951) {
+
         $product_name = $_POST['product_name'] ;
         $product_desc = $_POST['product_desc'] ;
         $color_code = $_POST['color_code'] ;
@@ -42,7 +64,6 @@ if (isset($_POST['product_name'])) {
             }
     
         }
-    }
 
 }
 

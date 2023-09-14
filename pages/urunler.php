@@ -15,6 +15,42 @@
         </div>
       </div>
     </section>
+    <?php 
+    
+    if (isset($_POST['edit_products'])) {
+      $product_name = $_POST['product_name'];
+      $product_desc = $_POST['product_desc'];
+      $color_code = $_POST['color_code'];
+      $size_code = $_POST['size_code'];
+      $product_miktar = $_POST['product_miktar'];
+      $statu = $_POST['statu'];
+      $product_id = $_POST['product_id'];
+      $args = [
+          'product_name' => $product_name,
+          'product_desc' => $product_desc,
+          'color_code' => $color_code,
+          'size_code' => $size_code,
+          'product_miktar' => $product_miktar,
+          'user_id' => $user_id,
+          'statu' => $statu,
+          'product_id' => $product_id
+
+      ];
+
+      $args = $adminclass->getSecurity($args);
+      $product_update = $adminclass->productUpdate($args);
+      if ($product_update) {
+        print '<div class="alert alert-success">İşlem Başarılı </div>"';
+      }
+      else {
+        print '<div class="alert alert-danger">İşlem Başarısız </div>"';
+
+      }
+
+
+    }
+    
+    ?>
     <section class="content">
       <div class="container-fluid">
         <div class="row">
@@ -66,7 +102,8 @@
                     <td><img src="./images/<?php print $product->images ; ?>" style="width: 150px;;"></td>
                     <td><?php print $adminclass->getStatu($product->statu) ; ?></td>
                     <td>
-                        <button id="product_delete" name="product_delete" class="btn btn-danger">Sil</button>
+                        <button id="product_delete" name="product_delete" class="btn btn-danger" onclick="productsDelete(<?php print $product->product_id ;?>);">Sil</button>
+                        <button id="product_edit" name="product_edit" class="btn btn-warning" onclick="productEdit(<?php print $product->product_id ;?>);">Düzenle</button>
 
                     </td>
                   </tr>
@@ -285,6 +322,115 @@
                   <div class="modal-footer justify-content-between">
                     <button type="button" class="btn btn-default" data-dismiss="modal">VAZGEÇ</button>
                     <button class="btn btn-success" id="save_data" name="save_data">KAYDET</button>
+                  </div>
+                </form>
+              </div>
+              <!-- /.card-body -->
+        </div>
+            </div>
+
+          </div>
+          <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+  </div>
+
+  <div class="modal fade" id="products-edit-modal">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-body">
+            <div class="card card-info">
+              <div class="card-header">
+                <h3 class="card-title">Ürün Güncelleme</h3>
+              </div>
+              <!-- /.card-header -->
+              <div class="card-body">
+                <form method="POST" id="product_edit_form" name="product_form">
+                  <div class="row">
+                    <div class="col-sm-12">
+                      <!-- text input -->
+                      <div class="form-group">
+                        <label>Ürün Adı</label>
+                        <input type="text" class="form-control" name ="product_name" id ="product_name" placeholder="Ürün adı giriniz..">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-sm-12">
+                      <!-- textarea -->
+                      <div class="form-group">
+                        <label>Ürün Açıklaması- Özellikleri</label>
+                        <textarea class="form-control" rows="5" name="product_desc" id="product_desc" placeholder="Açıklama giriniz..."></textarea>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- input states -->
+                  <div class="row">
+                    <div class="col-sm-12">
+                      <div class="form-group">
+                        <label>Renk Seçiniz</label>
+                        <select class="form-control" id="color_code" name="color_code">
+                          <?php
+                           $sql="SELECT * FROM qp_color WHERE statu = 1";
+                           $query = $adminclass->pdoQueryObj($sql);
+                           if ($query) {
+                          foreach ($query as $color) { ?>
+                          <option value="<?php print $color->color_code?>"><?php print $color->color_desc?></option>
+                          <?php }} ?>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-sm-12">
+                      <!-- select -->
+                      <div class="form-group">
+                        <label>Beden Seçiniz</label>
+                        <select class="form-control" id="size_code" name="size_code">
+                        <?php
+                           $sql="SELECT * FROM qp_size WHERE statu = 1";
+                           $query = $adminclass->pdoQueryObj($sql);
+                           if ($query) {
+                          foreach ($query as $size) { ?>
+                          <option value="<?php print $size->size_id?>"><?php print $size->size_desc?></option>
+                          <?php }} ?>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="col-form-label" for="inputError"><i class="far fa-times-circle"></i> Miktar</label>
+                    <input type="text" class="form-control is-invalid" name="product_miktar" id="product_miktar" placeholder="Miktar giriniz..">
+                  </div>
+                  <div class="row">
+                    <div class="col-sm-12">
+                  <div class="form-group">
+                    <label>Resim</label>
+                    <div class="input-group">
+                      <div class="custom-file">
+                        <input type="file" name="images" id="images">
+                      </div>
+                    </div>
+                  </div>
+                  </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-sm-12">
+                      <!-- select -->
+                      <div class="form-group">
+                        <label>Durum</label>
+                        <select class="form-control" name="statu" id="statu">
+                          <option value="1">Aktif</option>
+                          <option value="2">Pasif</option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="modal-footer justify-content-between">
+                    <input type="hidden" name="product_id" id="product_id" >
+                    <button type="button" class="btn btn-default" data-dismiss="modal">VAZGEÇ</button>
+                    <button class="btn btn-success" id="save_data" name="edit_products">KAYDET</button>
                   </div>
                 </form>
               </div>

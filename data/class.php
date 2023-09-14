@@ -20,7 +20,7 @@ class AdminClass
         }
     }
     public function getColorCount($color_desc) {
-        $sql="SELECT COUNT(*) as total FROM `qp_color` WHERE color_desc = ?";
+        $sql="SELECT COUNT(*) as total FROM qp_color WHERE color_desc = ?";
         $prepare= $this->pdo->prepare($sql);
         $prepare->execute([$color_desc]);
         $response = $prepare->fetch(PDO::FETCH_OBJ);
@@ -32,7 +32,7 @@ class AdminClass
         }
     }
     public function getSizeCount($size_desc) {
-        $sql="SELECT COUNT(*) as total FROM `qp_size` WHERE size_desc = ?";
+        $sql="SELECT COUNT(*) as total FROM qp_size WHERE size_desc = ?";
         $prepare= $this->pdo->prepare($sql);
         $prepare->execute([$size_desc]);
         $response = $prepare->fetch(PDO::FETCH_OBJ);
@@ -70,6 +70,53 @@ class AdminClass
             default:
                 return 'Belirsiz';
                 break;
+        }
+    }
+
+    public function productUpdate($args = []) {
+        $sql = "
+            UPDATE qp_product
+            SET
+            product_name =:product_name,
+            product_desc =:product_desc,
+            color_code =:color_code,
+            size_code =:size_code,
+            product_miktar =:product_miktar,
+            user_id =:user_id,
+            statu =:statu
+            WHERE product_id =:product_id";
+            $prepare = $this->pdo->prepare($sql);
+            $prepare->execute($args);
+            $response = $prepare->rowCount();
+            if ($response) {
+                return $response;
+            } else {
+                return false;
+            }
+    }
+
+    public function getProduct($product_id) {
+        $sql="SELECT 
+        t1.product_id,
+        t1.product_name,
+        t1.product_desc,
+        t2.color_code,
+        t2.color_desc,
+        t3.size_id,
+        t3.size_desc,
+        t1.product_miktar,
+        t1.images,
+        t1.statu
+        FROM qp_product t1
+        INNER JOIN qp_color t2 ON t1.color_code = t2.color_code
+        INNER JOIN qp_size t3 ON t1.size_code = t3.size_id WHERE t1.product_id = :product_id";
+        $prepare = $this->pdo->prepare($sql);
+        $prepare->execute(['product_id' => $product_id]);
+        $response = $prepare->fetch(PDO::FETCH_OBJ);
+        if ($response) {
+            return $response;
+        } else {
+            return false;
         }
     }
 

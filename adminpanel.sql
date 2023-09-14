@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Anamakine: 127.0.0.1
--- Üretim Zamanı: 14 Eyl 2023, 16:13:23
+-- Üretim Zamanı: 14 Eyl 2023, 20:37:46
 -- Sunucu sürümü: 10.4.28-MariaDB
 -- PHP Sürümü: 8.2.4
 
@@ -187,15 +187,15 @@ INSERT INTO `qp_mobileapp` (`id`, `tittle`, `description`, `image`, `price`, `ne
 
 CREATE TABLE `qp_product` (
   `product_id` int(11) NOT NULL,
-  `product_name` varchar(255) NOT NULL,
-  `product_desc` text NOT NULL,
-  `color_code` int(11) NOT NULL,
-  `size_code` int(11) NOT NULL,
-  `product_miktar` int(11) NOT NULL,
-  `images` varchar(255) NOT NULL,
-  `user_id` int(11) NOT NULL,
-  `create_date` datetime NOT NULL,
-  `statu` int(11) NOT NULL
+  `product_name` varchar(255) DEFAULT NULL,
+  `product_desc` text DEFAULT NULL,
+  `color_code` int(11) DEFAULT NULL,
+  `size_code` int(11) DEFAULT NULL,
+  `product_miktar` int(11) DEFAULT NULL,
+  `images` varchar(255) DEFAULT NULL,
+  `user_id` int(11) DEFAULT NULL,
+  `create_date` datetime DEFAULT NULL,
+  `statu` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_turkish_ci;
 
 --
@@ -203,10 +203,8 @@ CREATE TABLE `qp_product` (
 --
 
 INSERT INTO `qp_product` (`product_id`, `product_name`, `product_desc`, `color_code`, `size_code`, `product_miktar`, `images`, `user_id`, `create_date`, `statu`) VALUES
-(10, 'Kazak', 'Yün Kazak', 2, 4, 100, '2023-09-12-370-bim_logo.png', 1, '2023-09-12 09:25:41', 1),
-(11, 'TEST ÜRÜN', 'sss', 1, 1, 22, '2023-09-12-805-bim_logo.png', 1, '2023-09-12 09:47:09', 1),
-(12, 'GÖZLÜK', 'GÖZLÜK', 8, 3, 77, '2023-09-12-385-logo-sd.png', 1, '2023-09-12 09:48:57', 1),
-(14, 'İş', 'Şirket', 1, 1, 23, '2023-09-14-441-girisimcilik.png', 1, '2023-09-14 08:45:28', 1);
+(0, 'TEST İZO', 'ürün testi', 1, 1, 22, '2023-09-14-951-izo.jpg', 1, '2023-09-14 20:34:38', 2),
+(0, 'TEST İZO', 'ürün testi', 1, 1, 22, '2023-09-14-389-izmir.jpg', 1, '2023-09-14 20:35:02', 2);
 
 -- --------------------------------------------------------
 
@@ -377,12 +375,6 @@ ALTER TABLE `qp_mobileapp`
   ADD PRIMARY KEY (`id`);
 
 --
--- Tablo için indeksler `qp_product`
---
-ALTER TABLE `qp_product`
-  ADD PRIMARY KEY (`product_id`);
-
---
 -- Tablo için indeksler `qp_referanslar`
 --
 ALTER TABLE `qp_referanslar`
@@ -451,12 +443,6 @@ ALTER TABLE `qp_mission`
 --
 ALTER TABLE `qp_mobileapp`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
-
---
--- Tablo için AUTO_INCREMENT değeri `qp_product`
---
-ALTER TABLE `qp_product`
-  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- Tablo için AUTO_INCREMENT değeri `qp_referanslar`

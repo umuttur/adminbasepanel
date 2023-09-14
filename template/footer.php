@@ -166,7 +166,7 @@ $(document).on("submit","#size_form", function(event){
       position: 'center',
       showConfirmButton: false,
       timer: 5000
-    });
+    })
   $.ajax({
     method: 'POST',
     url: './helper/process.php',
@@ -203,7 +203,6 @@ $(document).on("submit","#size_form", function(event){
 
 
 </script>
-
 <script>
   $(function () {
     $("#example1").DataTable({
@@ -221,6 +220,92 @@ $(document).on("submit","#size_form", function(event){
       "responsive": true,
     });
   });
+</script>
+<!-- Product delete and exit -->
+<script type="text/javascript">
+  function productsDelete(id) {
+    var Toast = Swal.mixin({
+      toast: true,
+      position: 'center',
+      showConfirmButton: false,
+      timer: 15000
+    })
+    Swal.fire({
+  title: 'Ürün Silinsin Mi ?',
+  showDenyButton: true,
+  showCancelButton: false,
+  confirmButtonText: 'Sil',
+  denyButtonText: `Vazgeç`,
+}).then((result) => {
+  /* Read more about isConfirmed, isDenied below */
+  if (result.isConfirmed) {
+    $.ajax({
+    method: 'POST',
+    url: './helper/process.php',
+    data: {'product_delete_id':id},
+    success:function(succ_data) {
+      if (succ_data == 'Ürün Silindi...') {
+        Toast.fire({
+        icon: 'success',
+        title: succ_data
+       })
+       location.reload();
+      }
+      else if(succ_data=='İşlem Hatası') {
+        Toast.fire({
+        icon: 'warning',
+        title: succ_data
+       })
+      }
+      else {
+        Toast.fire({
+        icon: 'info',
+        title: succ_data
+       })
+      }
+    },
+    error:function(err_data) {
+      alert(err_data);
+    }
+  });
+
+  } else if (result.isDenied) {
+    Swal.fire('Ürün Silinmedi', '', 'info')
+  }
+})   
+}
+
+function productEdit(product_id) {
+  $.ajax({
+    method: 'POST',
+    url: './helper/process.php',
+    data: {'product_edit_id':product_id},
+    success:function(succ_data) {
+      var product_data = JSON.parse(succ_data);
+      $('#products-edit-modal #product_name').attr('value', product_data.product_name);
+      $('#products-edit-modal #product_desc').val(product_data.product_desc);
+      $('#products-edit-modal #product_miktar').attr('value',product_data.product_miktar);
+      $('#products-edit-modal #color_code option:selected').text(product_data.color_desc);
+      $('#products-edit-modal #size_code option:selected').text(product_data.size_desc);
+      $('#products-edit-modal #product_id option:selected').attr('value',product_data.product_id);
+      if (product_data.statu == 1) {
+        $('#products-edit-modal #statu option:selected').text('Aktif');
+      }else {
+        $('#products-edit-modal #statu option:selected').text('Pasif');
+
+      }
+
+
+
+
+      $('#products-edit-modal').modal('show');
+    },
+    error:function(err_data) {
+      alert(err_data);
+    }
+  });
+}
+    
 </script>
 </body>
 </html>
