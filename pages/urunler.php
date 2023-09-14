@@ -15,12 +15,90 @@
         </div>
       </div>
     </section>
-
     <section class="content">
       <div class="container-fluid">
         <div class="row">
-        <div class="col-sm-6"> 
-        <div class="card card-info">
+        <div class="col-sm-12">
+            <div class="card">
+              <div class="card-header">
+                <button type="button" class="btn btn-success" data-toggle="modal" data-target="#products-modal">Ürün Ekle</button>
+                <button type="button" class="btn btn-success" data-toggle="modal" data-target="#color-modal">Renk Ekle</button>
+                <button type="button" class="btn btn-success" data-toggle="modal" data-target="#size-modal">Beden Ekle</button>
+              </div>
+              <!-- /.card-header -->
+              <div class="card-body">
+                <table id="example1" class="table table-bordered table-striped">
+                  <thead>
+                  <tr>
+                    <th>Ürün Id</th>
+                    <th>Ürün Adı</th>
+                    <th>Ürün Rengi</th>
+                    <th>Ürün Bedeni</th>
+                    <th>Ürün Miktarı</th>
+                    <th>Ürün Resmi</th>
+                    <th>Ürün Durumu</th>
+                    <th>İşlem</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                    <?php 
+                    $sql="SELECT 
+                    t1.product_id,
+                    t1.product_name,
+                    t2.color_desc,
+                    t3.size_desc,
+                    t1.product_miktar,
+                    t1.images,
+                    t1.statu
+                    FROM qp_product t1
+                    INNER JOIN qp_color t2 ON t1.color_code = t2.color_code
+                    INNER JOIN qp_size t3 ON t1.size_code = t3.size_id";
+                    $products = $adminclass->pdoQueryObj($sql);
+                    if ($products) {
+                      foreach ($products as $product) {             
+                    ?>
+                  <tr>
+                    <td><?php print $product->product_id ; ?></td>
+                    <td><?php print $product->product_name ; ?></td>
+                    <td><?php print $product->color_desc ; ?></td>
+                    <td><?php print $product->size_desc; ?></td>
+                    <td><?php print $product->product_miktar ; ?></td>
+                    <td><img src="./images/<?php print $product->images ; ?>" style="width: 150px;;"></td>
+                    <td><?php print $adminclass->getStatu($product->statu) ; ?></td>
+                    <td>
+                        <button id="product_delete" name="product_delete" class="btn btn-danger">Sil</button>
+
+                    </td>
+                  </tr>
+                  <?php }}?>
+                  </tbody>
+                  <tfoot>
+                  <tr>
+                    <th>Ürün ID</th>
+                    <th>Ürün Adı</th>
+                    <th>Ürün Rengi</th>
+                    <th>Ürün Bedeni</th>
+                    <th>Ürün Miktarı</th>
+                    <th>Ürün Resmi</th>
+                    <th>Ürün Durumu</th>
+                    <th>İşlem</th>
+                  </tr>
+                  </tfoot>
+                </table>
+              </div>
+              <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+          </div>
+      </div>
+      </div>
+    </section>
+  </div>
+  <div class="modal fade" id="products-modal">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-body">
+            <div class="card card-info">
               <div class="card-header">
                 <h3 class="card-title">Yeni Ürün Ekle</h3>
               </div>
@@ -108,15 +186,27 @@
                       </div>
                     </div>
                   </div>
-                  <input type="hidden" value="95954" name="postcheck">
-                  <button class="btn btn-success" id="save_data" name="save_data">KAYDET</button>
+                  <input type="hidden" value="95951" name="postcheck">
+                  <div class="modal-footer justify-content-between">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">VAZGEÇ</button>
+                    <button class="btn btn-success" id="save_data" name="save_data">KAYDET</button>
+                  </div>
                 </form>
               </div>
               <!-- /.card-body -->
         </div>
+            </div>
+
+          </div>
+          <!-- /.modal-content -->
         </div>
-        <div class="col-sm-6"> 
-        <div class="card card-navy">
+        <!-- /.modal-dialog -->
+  </div>
+  <div class="modal fade" id="color-modal">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-body">
+            <div class="card card-navy">
               <div class="card-header">
                 <h3 class="card-title">Renk Ekle</h3>
               </div>
@@ -144,12 +234,26 @@
                       </div>
                     </div>
                   </div>
-                  <button class="btn btn-success" id="save_data" name="save_data">KAYDET</button>
+                  <div class="modal-footer justify-content-between">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">VAZGEÇ</button>
+                    <button class="btn btn-success" id="save_data" name="save_data">KAYDET</button>
+                  </div>
                 </form>
               </div>
               <!-- /.card-body -->
         </div>
-        <div class="card card-teal">
+            </div>
+
+          </div>
+          <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+  </div>
+  <div class="modal fade" id="size-modal">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-body">
+            <div class="card card-teal">
               <div class="card-header">
                 <h3 class="card-title">Beden Ekle</h3>
               </div>
@@ -177,78 +281,19 @@
                       </div>
                     </div>
                   </div>
-                  <button class="btn btn-success" id="save_data" name="save_data">KAYDET</button>
+
+                  <div class="modal-footer justify-content-between">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">VAZGEÇ</button>
+                    <button class="btn btn-success" id="save_data" name="save_data">KAYDET</button>
+                  </div>
                 </form>
               </div>
               <!-- /.card-body -->
         </div>
-        </div>
-        <div class="col-sm-12">
-            <div class="card">
-              <div class="card-header">
-                <h3 class="card-title">DataTable with default features</h3>
-              </div>
-              <!-- /.card-header -->
-              <div class="card-body">
-                <table id="example1" class="table table-bordered table-striped">
-                  <thead>
-                  <tr>
-                    <th>Ürün Id</th>
-                    <th>Ürün Adı</th>
-                    <th>Ürün Rengi</th>
-                    <th>Ürün Bedeni</th>
-                    <th>Ürün Miktarı</th>
-                    <th>Ürün Resmi</th>
-                    <th>Ürün Durumu</th>
-                  </tr>
-                  </thead>
-                  <tbody>
-                    <?php 
-                    $sql="SELECT 
-                    t1.product_id,
-                    t1.product_name,
-                    t2.color_desc,
-                    t3.size_desc,
-                    t1.product_miktar,
-                    t1.images,
-                    t1.statu
-                    FROM qp_product t1
-                    INNER JOIN qp_color t2 ON t1.color_code = t2.color_code
-                    INNER JOIN qp_size t3 ON t1.size_code = t3.size_id";
-                    $products = $adminclass->pdoQueryObj($sql);
-                    if ($products) {
-                      foreach ($products as $product) {             
-                    ?>
-                  <tr>
-                    <td><?php print $product->product_id ; ?></td>
-                    <td><?php print $product->product_name ; ?></td>
-                    <td><?php print $product->color_desc ; ?></td>
-                    <td><?php print $product->size_desc; ?></td>
-                    <td><?php print $product->product_miktar ; ?></td>
-                    <td><?php print $product->images ; ?></td>
-                    <td><?php print $adminclass->getStatu($product->statu) ; ?></td>
-                  </tr>
-                  <?php }}?>
-                  </tbody>
-                  <tfoot>
-                  <tr>
-                    <th>Ürün ID</th>
-                    <th>Ürün Adı</th>
-                    <th>Ürün Rengi</th>
-                    <th>Ürün Bedeni</th>
-                    <th>Ürün Miktarı</th>
-                    <th>Ürün Resmi</th>
-                    <th>Ürün Durumu</th>
-                  </tr>
-                  </tfoot>
-                </table>
-              </div>
-              <!-- /.card-body -->
             </div>
-            <!-- /.card -->
-          </div>
-      </div>
-      </div>
-    </section>
 
+          </div>
+          <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
   </div>

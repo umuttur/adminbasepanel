@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Anamakine: 127.0.0.1
--- Üretim Zamanı: 12 Eyl 2023, 16:14:45
+-- Üretim Zamanı: 14 Eyl 2023, 16:13:23
 -- Sunucu sürümü: 10.4.28-MariaDB
 -- PHP Sürümü: 8.2.4
 
@@ -104,7 +104,9 @@ INSERT INTO `qp_color` (`color_code`, `color_desc`, `user_id`, `create_date`, `s
 (7, 'Haki', 1, '2023-09-11 15:53:20', 1),
 (8, 'MOR', 1, '2023-09-11 15:53:51', 1),
 (9, 'Blue', 1, '2023-09-12 08:14:53', 1),
-(10, 'kıraç', 1, '2023-09-12 09:45:51', 1);
+(10, 'kıraç', 1, '2023-09-12 09:45:51', 1),
+(11, 'Kahvebeyaz', 1, '2023-09-14 10:39:04', 1),
+(12, 'Haki Beyaz', 1, '2023-09-14 14:00:11', 1);
 
 -- --------------------------------------------------------
 
@@ -204,7 +206,7 @@ INSERT INTO `qp_product` (`product_id`, `product_name`, `product_desc`, `color_c
 (10, 'Kazak', 'Yün Kazak', 2, 4, 100, '2023-09-12-370-bim_logo.png', 1, '2023-09-12 09:25:41', 1),
 (11, 'TEST ÜRÜN', 'sss', 1, 1, 22, '2023-09-12-805-bim_logo.png', 1, '2023-09-12 09:47:09', 1),
 (12, 'GÖZLÜK', 'GÖZLÜK', 8, 3, 77, '2023-09-12-385-logo-sd.png', 1, '2023-09-12 09:48:57', 1),
-(13, 'Kazak2', 'SSS', 1, 1, 122, '2023-09-12-591-', 1, '2023-09-12 09:55:44', 1);
+(14, 'İş', 'Şirket', 1, 1, 23, '2023-09-14-441-girisimcilik.png', 1, '2023-09-14 08:45:28', 1);
 
 -- --------------------------------------------------------
 
@@ -256,7 +258,12 @@ INSERT INTO `qp_size` (`size_id`, `size_desc`, `user_id`, `create_date`, `statu`
 (5, '44', 1, '2023-09-11 14:01:32', 1),
 (6, 'S', 1, '2023-09-12 09:51:06', 1),
 (7, 'XS', 1, '2023-09-12 09:53:11', 1),
-(8, 'XL', 1, '2023-09-12 09:53:19', 1);
+(8, 'XL', 1, '2023-09-12 09:53:19', 1),
+(9, 'L', 1, '2023-09-14 08:50:21', 1),
+(10, 'XXL', 1, '2023-09-14 08:50:29', 1),
+(11, 'XXXL', 1, '2023-09-14 10:44:54', 1),
+(12, 'XXS', 1, '2023-09-14 10:50:02', 1),
+(13, '37', 1, '2023-09-14 14:00:01', 1);
 
 -- --------------------------------------------------------
 
@@ -425,7 +432,7 @@ ALTER TABLE `qp_categories`
 -- Tablo için AUTO_INCREMENT değeri `qp_color`
 --
 ALTER TABLE `qp_color`
-  MODIFY `color_code` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `color_code` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- Tablo için AUTO_INCREMENT değeri `qp_ecommerce`
@@ -449,7 +456,7 @@ ALTER TABLE `qp_mobileapp`
 -- Tablo için AUTO_INCREMENT değeri `qp_product`
 --
 ALTER TABLE `qp_product`
-  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- Tablo için AUTO_INCREMENT değeri `qp_referanslar`
@@ -461,7 +468,7 @@ ALTER TABLE `qp_referanslar`
 -- Tablo için AUTO_INCREMENT değeri `qp_size`
 --
 ALTER TABLE `qp_size`
-  MODIFY `size_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `size_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- Tablo için AUTO_INCREMENT değeri `qp_users`

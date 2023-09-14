@@ -122,7 +122,7 @@ $(document).on("submit","#color_form", function(event){
       toast: true,
       position: 'center',
       showConfirmButton: false,
-      timer: 3000
+      timer: 5000
     });
   $.ajax({
     method: 'POST',
@@ -165,7 +165,7 @@ $(document).on("submit","#size_form", function(event){
       toast: true,
       position: 'center',
       showConfirmButton: false,
-      timer: 3000
+      timer: 5000
     });
   $.ajax({
     method: 'POST',
@@ -193,13 +193,14 @@ $(document).on("submit","#size_form", function(event){
        })
       }
       $('#size_form').trigger('reset');
-      location.reload();
     },
     error:function(err_data) {
       console.log(err_data);
     }
   });
 })
+
+
 
 </script>
 
