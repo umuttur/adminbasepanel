@@ -295,9 +295,6 @@ function productEdit(product_id) {
 
       }
 
-
-
-
       $('#products-edit-modal').modal('show');
     },
     error:function(err_data) {
